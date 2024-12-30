@@ -13,14 +13,14 @@ workflows:
           cd ios
           pod install
           cd ..
-      - name: Build iOS
+      - name: Create archive directory
         script: |
-          flutter build ios --debug --no-codesign
+          mkdir -p build/ios/archive
       - name: Archive iOS
         script: |
-          xcodebuild -workspace ios/Runner.xcworkspace -scheme Runner -configuration Debug -archivePath build/ios/archive/Runner.xcarchive CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO DEVELOPMENT_TEAM="" CODE_SIGN_STYLE=Manual
+          xcodebuild -workspace ios/Runner.xcworkspace -scheme Runner -configuration Debug clean archive -archivePath build/ios/archive/Runner.xcarchive CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO
       - name: Export IPA
         script: |
-          xcodebuild -exportArchive -archivePath build/ios/archive/Runner.xcarchive -exportOptionsPlist ios/Runner/ExportOptions.plist -exportPath build/ios/ipa -allowProvisioningUpdates CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO DEVELOPMENT_TEAM="" CODE_SIGN_STYLE=Manual
+          xcodebuild -exportArchive -archivePath build/ios/archive/Runner.xcarchive -exportOptionsPlist ios/Runner/ExportOptions.plist -exportPath build/ios/ipa CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO
     artifacts:
       - build/ios/ipa/*.ipa
