@@ -1,0 +1,47 @@
+---
+format_version: '8'
+default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
+project_type: flutter
+workflows:
+  primary:
+    steps:
+      - activate-ssh-key@4: {}
+      - git-clone@8: {}
+      - cache-pull@2: {}
+      - flutter-installer@0:
+          inputs:
+            - flutter_version: 'stable'
+      - flutter-analyze@0: {}
+      - flutter-test@0: {}
+      - flutter-build@0:
+          inputs:
+            - platform: ios
+            - build_configuration: release
+      - cocoapods-install@1: {}
+      - xcode-archive@3:
+          inputs:
+            - project_path: ios/Runner.xcworkspace
+            - scheme: Runner
+            - export_method: development
+            - configuration: Release
+            - force_team_id: ""
+            - force_code_sign_identity: ""
+            - export_options_plist_content: |
+                <?xml version="1.0" encoding="UTF-8"?>
+                <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+                <plist version="1.0">
+                <dict>
+                  <key>method</key>
+                  <string>development</string>
+                  <key>compileBitcode</key>
+                  <false/>
+                  <key>destination</key>
+                  <string>export</string>
+                  <key>signingStyle</key>
+                  <string>manual</string>
+                  <key>stripSwiftSymbols</key>
+                  <true/>
+                </dict>
+                </plist>
+      - deploy-to-bitrise-io@1: {}
+      - cache-push@2: {}
