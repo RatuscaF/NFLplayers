@@ -1,3 +1,3 @@
-# nba_quiz
+# nfl_quiz
 
 A new Flutter project.
