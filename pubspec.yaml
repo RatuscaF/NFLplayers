@@ -1,0 +1,26 @@
+name: nba_quiz
+description: "A new Flutter project."
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: ^3.6.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+  restart_app: ^1.0.0
+  csv: ^5.0.2
+  path_provider: ^2.0.3
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+  - assets/NFL_Players.csv
+  - assets/NFL_Logo.png
+  - assets/background.png
