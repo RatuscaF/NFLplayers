@@ -12,5 +12,12 @@
   <string>manual</string>
   <key>stripSwiftSymbols</key>
   <true/>
+  <key>signingCertificate</key>
+  <string>Apple Development</string>
+  <key>provisioningProfiles</key>
+  <dict>
+    <key>com.ratusca.nflplayers</key>
+    <string>match Development *</string>
+  </dict>
 </dict>
 </plist>
