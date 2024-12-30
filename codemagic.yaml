@@ -1,4 +1,3 @@
-# filepath: /d:/Fiverr/iosNBAapp/nba_quiz/codemagic.yaml
 workflows:
   ios-workflow:
     name: iOS Workflow
